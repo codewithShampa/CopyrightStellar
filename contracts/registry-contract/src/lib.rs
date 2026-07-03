@@ -104,6 +104,11 @@ impl RegistryContract {
     pub fn get_count(env: Env) -> u32 {
         env.storage().instance().get(&DataKey::RegistryCount).unwrap_or(0)
     }
+
+    /// Check if a file hash is registered.
+    pub fn is_registered(env: Env, file_hash: BytesN<32>) -> bool {
+        env.storage().persistent().has(&DataKey::HashExists(file_hash))
+    }
 }
 
 mod test;

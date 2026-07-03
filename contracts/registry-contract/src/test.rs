@@ -94,3 +94,30 @@ fn test_verify_unregistered_hash() {
     // Should panic because hash doesn't exist
     client.verify(&unknown_hash);
 }
+
+#[test]
+fn test_is_registered() {
+    let env = Env::default();
+    env.mock_all_auths();
+
+    let contract_id = env.register(RegistryContract, ());
+    let client = RegistryContractClient::new(&env, &contract_id);
+
+    let admin = Address::generate(&env);
+    client.initialize(&admin);
+
+    let creator = Address::generate(&env);
+    let file_hash = BytesN::from_array(&env, &[4u8; 32]);
+    let title = String::from_str(&env, "Verification Test");
+    let description = String::from_str(&env, "Testing is_registered");
+
+    let unknown_hash = BytesN::from_array(&env, &[99u8; 32]);
+
+    assert_eq!(client.is_registered(&file_hash), false);
+    assert_eq!(client.is_registered(&unknown_hash), false);
+
+    client.register(&creator, &file_hash, &title, &description);
+
+    assert_eq!(client.is_registered(&file_hash), true);
+    assert_eq!(client.is_registered(&unknown_hash), false);
+}
