@@ -118,3 +118,23 @@ fn test_non_owner_cannot_grant() {
     // Non-owner tries to grant access — should panic
     client.grant_access(&license_id, &imposter, &user);
 }
+
+#[test]
+#[should_panic(expected = "Votes must be greater than 0")]
+fn test_negative_votes_rejected() {
+    let env = Env::default();
+    env.mock_all_auths();
+
+    let contract_id = env.register(LicenseDaoContract, ());
+    let client = LicenseDaoContractClient::new(&env, &contract_id);
+
+    let plaintiff = Address::generate(&env);
+    let defendant = Address::generate(&env);
+    let evidence = BytesN::from_array(&env, &[8u8; 32]);
+
+    let dispute_id = client.file_dispute(&plaintiff, &defendant, &1, &evidence);
+
+    let voter = Address::generate(&env);
+    // Negative votes should panic
+    client.vote_dispute(&voter, &dispute_id, &-5, &true);
+}

@@ -220,11 +220,12 @@ impl LicenseDaoContract {
             panic!("Voter has already voted on this dispute");
         }
 
+        if votes <= 0 {
+            panic!("Votes must be greater than 0");
+        }
+
         // Quadratic cost
         let cost = votes.checked_mul(votes).expect("Cost overflow");
-        if cost <= 0 {
-            panic!("Must vote with at least 1 vote");
-        }
 
         // Transfer voting token cost (if DAO has a token)
         if env.storage().instance().has(&DataKey::Token) {
