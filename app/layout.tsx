@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
+import AnalyticsTracker from '@/components/layout/AnalyticsTracker';
 
 export const metadata: Metadata = {
   title: 'CopyrightStellar — Decentralized IP & Copyright Registry',
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen bg-surface-950 text-slate-100 antialiased">
+        <AnalyticsTracker />
         <Toaster
           position="bottom-right"
           toastOptions={{

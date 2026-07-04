@@ -47,29 +47,38 @@ export default function VerifyPage() {
 
       const args = [StellarSdk.xdr.ScVal.scvBytes(Buffer.from(hashBytes))];
 
-      const retval = await stellar.simulateRead({
+      const isRegVal = await stellar.simulateRead({
         publicKey,
         contractId: REGISTRY_CONTRACT_ID,
-        method: 'verify',
+        method: 'is_registered',
         args,
       });
 
-      if (retval) {
-        const native = StellarSdk.scValToNative(retval);
-        if (native && typeof native === 'object') {
-          setResult({
-            found: true,
-            id: String(native.id || ''),
-            creator: String(native.creator || ''),
-            title: String(native.title || ''),
-            timestamp: native.timestamp ? new Date(Number(native.timestamp) * 1000).toLocaleString() : '',
-          });
-        } else {
-          setResult({ found: false });
+      const registered = isRegVal ? StellarSdk.scValToNative(isRegVal) : false;
+
+      if (registered) {
+        const retval = await stellar.simulateRead({
+          publicKey,
+          contractId: REGISTRY_CONTRACT_ID,
+          method: 'verify',
+          args,
+        });
+
+        if (retval) {
+          const native = StellarSdk.scValToNative(retval);
+          if (native && typeof native === 'object') {
+            setResult({
+              found: true,
+              id: String(native.id || ''),
+              creator: String(native.creator || ''),
+              title: String(native.title || ''),
+              timestamp: native.timestamp ? new Date(Number(native.timestamp) * 1000).toLocaleString() : '',
+            });
+            return;
+          }
         }
-      } else {
-        setResult({ found: false });
       }
+      setResult({ found: false });
     } catch {
       setResult({ found: false });
     } finally {
