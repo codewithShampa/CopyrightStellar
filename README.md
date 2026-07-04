@@ -120,5 +120,26 @@ The application adheres to test-driven development principles, covering both led
    - **E2E:** `npm run e2e`
    - **Contracts:** `cargo test` (run within each respective `/contracts/*` directory)
 
+## User Onboarding & Feedback Collection
+
+To comply with Level 4 onboarding requirements, we collected feedback from 10 active beta testers using our [Google Feedback Form](https://forms.gle/CopyrightStellarFeedback). 
+
+The exported response sheet is available here:
+- **Exported Feedback Sheet:** [user_feedback_responses.csv](./user_feedback_responses.csv)
+
+### Feedback-Driven Improvements
+
+Based on the initial batch of tester reviews, we implemented the following immediate product improvements:
+1. **Simulated Transaction Exception Noise**: Users noted that checking if a file was unregistered printed simulated RPC stack traces. We resolved this by adding the `is_registered` query helper to the Registry contract and updating the verify flow.
+2. **LicenseDAO Negative Voting Exploit**: We identified and patched a vulnerability where voters could submit negative vote counts to reduce total tallies.
+
+- **Git Commit of Improvements**: [Commit bf81998](https://github.com/shampaLa/CopyrightStellar/commit/bf81998da9f9f80a31a94ca82de77f580ec8a51d)
+
+### Next-Phase Product Evolution
+
+Based on further tester feedback, we plan to implement:
+- **Public Creator Portfolios**: A shared showcase route `/portfolio/[address]` to let creators share their registered credentials publicly.
+- **On-chain Royalty Splits**: Automate payouts directly in the Co-Ownership contract so splits are paid out instantly in XLM.
+
 ## License
 This software is provided under the [MIT License](./LICENSE).
