@@ -28,6 +28,7 @@
 - [System Architecture](#system-architecture)
 - [Smart Contract Infrastructure](#smart-contract-infrastructure)
 - [Feature Walkthrough](#feature-walkthrough)
+- [Screenshots](#screenshots)
 - [Level 4 Submission Requirements Matrix](#level-4-submission-requirements-matrix)
 - [Continuous Integration & Delivery](#continuous-integration--delivery)
 - [Testing & Quality Assurance](#testing--quality-assurance)
@@ -198,6 +199,31 @@ Smart contracts emit custom Soroban events on every state change. The frontend p
 
 ### 6. XLM Transfers
 - Direct peer-to-peer XLM transfer with Stellar Explorer integration
+
+---
+
+## Screenshots
+
+### Product UI
+
+<div align="center">
+  <img src="./assets/ui.png" alt="CopyrightStellar — Product UI" width="860"/>
+  <p><em>Main dashboard — Register, Verify, Split Sheet, Licenses, Disputes</em></p>
+</div>
+
+### Mobile Responsive Design
+
+<div align="center">
+  <img src="./assets/mobui.png" alt="CopyrightStellar — Mobile Responsive UI" width="320"/>
+  <p><em>Full mobile-optimized layout tested on iOS and Android browsers</em></p>
+</div>
+
+### Analytics & Monitoring Setup
+
+<div align="center">
+  <img src="./assets/cicd.png" alt="CopyrightStellar — CI/CD and Monitoring Pipeline" width="860"/>
+  <p><em>GitHub Actions CI/CD pipeline — contract compilation, unit tests, E2E tests, and production build on every push to main</em></p>
+</div>
 
 ---
 
