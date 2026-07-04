@@ -33,3 +33,8 @@ contracts/*/target/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local media and scratch folders
+New folder/
+test-results/
+.last-run.json
