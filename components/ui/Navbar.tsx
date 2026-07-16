@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HiOutlineDocumentText, HiOutlineShieldCheck, HiOutlineScale, HiOutlineCurrencyDollar } from 'react-icons/hi2';
+import { HiOutlineDocumentText, HiOutlineShieldCheck, HiOutlineScale, HiOutlineCurrencyDollar, HiOutlineGlobeAlt } from 'react-icons/hi2';
 import { IoFingerPrintOutline } from 'react-icons/io5';
 import { MdOutlineDashboard } from 'react-icons/md';
 import { RiGroupLine } from 'react-icons/ri';
@@ -10,6 +10,7 @@ import WalletButton from '@/components/wallet/WalletButton';
 
 const NAV_LINKS = [
   { href: '/', label: 'Home', icon: MdOutlineDashboard },
+  { href: '/explorer', label: 'Explorer', icon: HiOutlineGlobeAlt },
   { href: '/register', label: 'Register', icon: IoFingerPrintOutline },
   { href: '/verify', label: 'Verify', icon: HiOutlineShieldCheck },
   { href: '/portfolio', label: 'Portfolio', icon: HiOutlineDocumentText },
