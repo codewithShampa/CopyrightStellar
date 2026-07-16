@@ -142,7 +142,7 @@ export default function ExplorerPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6">
                       <div>
                         <p className="text-[10px] text-slate-500 uppercase tracking-wider mb-1">Creator / Owner</p>
-                        <Link href={`/creator/${work.creator}`} className="text-sm font-mono text-brand-400 hover:text-brand-300 transition-colors">
+                        <Link href={`/creator?address=${work.creator}`} className="text-sm font-mono text-brand-400 hover:text-brand-300 transition-colors">
                           {work.creator.slice(0, 8)}...{work.creator.slice(-8)}
                         </Link>
                       </div>

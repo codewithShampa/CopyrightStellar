@@ -201,7 +201,7 @@ export default function PortfolioPage() {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Link href={`/creator/${publicKey}`} className="btn-secondary text-xs flex items-center justify-center gap-1.5">
+                    <Link href={`/creator?address=${publicKey}`} className="btn-secondary text-xs flex items-center justify-center gap-1.5">
                       Public Profile
                     </Link>
                     <button
