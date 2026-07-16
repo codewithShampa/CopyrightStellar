@@ -135,7 +135,7 @@ export default function ExplorerPage() {
                 <div className="flex flex-col md:flex-row justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <Badge label={`ID #${work.id}`} variant="outline" />
+                      <Badge label={`ID #${work.id}`} />
                       <h3 className="font-semibold text-slate-200 text-lg">{work.title}</h3>
                     </div>
                     
