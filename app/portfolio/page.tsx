@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/layout/Footer';
 import Badge from '@/components/ui/Badge';
+import Certificate from '@/components/ui/Certificate';
+import Link from 'next/link';
 import { useWallet } from '@/hooks/useWallet';
 import { stellar } from '@/lib/stellar';
 import { COOWNERSHIP_CONTRACT_ID, REGISTRY_CONTRACT_ID } from '@/lib/constants';
@@ -190,14 +192,26 @@ export default function PortfolioPage() {
                         <p className="text-xs text-slate-500 font-mono truncate">{work.fileHash}</p>
                       </div>
                     )}
+                    <Certificate 
+                      id={work.id}
+                      title={work.title}
+                      creator={publicKey}
+                      fileHash={work.fileHash}
+                      timestamp={work.createdAt}
+                    />
                   </div>
-                  <button
-                    onClick={() => setTransferModal({ workId: work.id, share: work.myShare })}
-                    className="btn-secondary text-xs flex items-center gap-1.5"
-                  >
-                    <HiOutlineArrowsRightLeft className="h-3.5 w-3.5" />
-                    Transfer
-                  </button>
+                  <div className="flex flex-col gap-2">
+                    <Link href={`/creator/${publicKey}`} className="btn-secondary text-xs flex items-center justify-center gap-1.5">
+                      Public Profile
+                    </Link>
+                    <button
+                      onClick={() => setTransferModal({ workId: work.id, share: work.myShare })}
+                      className="btn-secondary text-xs flex items-center justify-center gap-1.5"
+                    >
+                      <HiOutlineArrowsRightLeft className="h-3.5 w-3.5" />
+                      Transfer
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

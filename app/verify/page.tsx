@@ -5,6 +5,7 @@ import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/layout/Footer';
 import DropZone from '@/components/ui/DropZone';
 import Badge from '@/components/ui/Badge';
+import Certificate from '@/components/ui/Certificate';
 import { useWallet } from '@/hooks/useWallet';
 import { stellar } from '@/lib/stellar';
 import { REGISTRY_CONTRACT_ID } from '@/lib/constants';
@@ -169,6 +170,13 @@ export default function VerifyPage() {
                         <p className="text-sm text-slate-300">{result.timestamp}</p>
                       </div>
                     </div>
+                    <Certificate 
+                      id={result.id!}
+                      title={result.title!}
+                      creator={result.creator!}
+                      fileHash={manualHash || fileHash}
+                      timestamp={result.timestamp!}
+                    />
                   </>
                 ) : (
                   <div className="text-center py-4">
