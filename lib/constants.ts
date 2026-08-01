@@ -14,3 +14,9 @@ export const COOWNERSHIP_CONTRACT_ID = 'CBM6H2CGIAJDBQ5K5747Z6RQWCP355WVBAF3LH7E
 
 export const LICENSE_DAO_CONTRACT_ID = 'CC3466SOHIWRKY62APTMWLMOX552JDYH5ZI3IDHOXAWYB64SN7MUCNJG';
 
+/** Friendbot endpoint for funding testnet accounts */
+export const FRIENDBOT_URL = 'https://friendbot.stellar.org';
+
+/** Default number of contract events to fetch */
+export const DEFAULT_EVENT_LIMIT = 10;
+
