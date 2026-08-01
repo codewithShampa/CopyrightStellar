@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/layout/Footer';
 import DropZone from '@/components/ui/DropZone';
@@ -22,6 +22,13 @@ export default function RegisterPage() {
   const [txHash, setTxHash] = useState('');
   const [txStatus, setTxStatus] = useState<TxStatus>('idle');
   const [registrationId, setRegistrationId] = useState<string | null>(null);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, []);
 
   const handleFileHashed = useCallback((hash: string, name: string) => {
     setFileHash(hash);
@@ -70,15 +77,17 @@ export default function RegisterPage() {
       setTxStatus('polling');
       toast.loading('Registering on-chain…', { id: 'register' });
 
-      const poll = setInterval(async () => {
+      pollRef.current = setInterval(async () => {
         const result = await stellar.pollTransaction(hash);
         if (result.status === 'SUCCESS') {
-          clearInterval(poll);
+          clearInterval(pollRef.current!);
+          pollRef.current = null;
           setTxStatus('success');
           setRegistrationId(result.returnValue || null);
           toast.success('Work registered on-chain!', { id: 'register' });
         } else if (result.status === 'FAILED') {
-          clearInterval(poll);
+          clearInterval(pollRef.current!);
+          pollRef.current = null;
           setTxStatus('failed');
           toast.error('Registration failed.', { id: 'register' });
         }
