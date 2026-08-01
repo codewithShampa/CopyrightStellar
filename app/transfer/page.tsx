@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/layout/Footer';
 import { useWallet } from '@/hooks/useWallet';
@@ -16,9 +16,26 @@ export default function TransferPage() {
   const [amount, setAmount] = useState('');
   const [txHash, setTxHash] = useState('');
   const [txStatus, setTxStatus] = useState<TxStatus>('idle');
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, []);
 
   const handleSend = useCallback(async () => {
     if (!isConnected || !recipient || !amount) return;
+
+    const parsedAmount = parseFloat(amount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+      toast.error('Amount must be a positive number.', { id: 'tx' });
+      return;
+    }
+    if (recipient === publicKey) {
+      toast.error('Cannot send XLM to yourself.', { id: 'tx' });
+      return;
+    }
 
     try {
       setTxStatus('signing');
@@ -27,14 +44,16 @@ export default function TransferPage() {
       setTxStatus('polling');
       toast.loading('Confirming transaction…', { id: 'tx' });
 
-      const poll = setInterval(async () => {
+      pollRef.current = setInterval(async () => {
         const result = await stellar.pollTransaction(hash);
         if (result.status === 'SUCCESS') {
-          clearInterval(poll);
+          clearInterval(pollRef.current!);
+          pollRef.current = null;
           setTxStatus('success');
           toast.success('Transfer successful!', { id: 'tx' });
         } else if (result.status === 'FAILED') {
-          clearInterval(poll);
+          clearInterval(pollRef.current!);
+          pollRef.current = null;
           setTxStatus('failed');
           toast.error('Transfer failed.', { id: 'tx' });
         }
