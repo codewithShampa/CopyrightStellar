@@ -37,6 +37,12 @@ export default function VerifyPage() {
     const hashToCheck = manualHash || fileHash;
     if (!isConnected || !hashToCheck) return;
 
+    // Validate hash format: must be exactly 64 hex characters
+    if (!/^[0-9a-fA-F]{64}$/.test(hashToCheck)) {
+      setResult({ found: false });
+      return;
+    }
+
     try {
       setVerifying(true);
       setResult(null);
