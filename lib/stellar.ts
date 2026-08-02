@@ -256,6 +256,9 @@ export class StellarHelper {
 
   stroopsToXlm(stroops: string | number | bigint): string {
     const value = BigInt(stroops);
+    if (value < BigInt(0)) {
+      throw new Error('Stroops value cannot be negative');
+    }
     const whole = value / BigInt(10_000_000);
     const fraction = value % BigInt(10_000_000);
     return `${whole}.${String(fraction).padStart(7, '0')}`;
