@@ -26,3 +26,14 @@ export function isValidXlmAmount(amount: string): boolean {
 export function isValidBasisPoints(bp: number): boolean {
   return Number.isInteger(bp) && bp > 0 && bp <= 10000;
 }
+
+/** Validates a work ID is a positive integer */
+export function isValidWorkId(id: number): boolean {
+  return Number.isInteger(id) && id > 0;
+}
+
+/** Validates a work title is non-empty and within length limits */
+export function isValidTitle(title: string): boolean {
+  const trimmed = title.trim();
+  return trimmed.length > 0 && trimmed.length <= 256;
+}
