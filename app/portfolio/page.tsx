@@ -99,6 +99,15 @@ export default function PortfolioPage() {
 
   const handleTransfer = useCallback(async () => {
     if (!transferModal || !transferTo || !transferAmount) return;
+    const parsedAmount = Number(transferAmount);
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+      toast.error('Transfer amount must be a positive number.');
+      return;
+    }
+    if (parsedAmount > transferModal.share) {
+      toast.error(`Amount exceeds your share (max ${transferModal.share} basis points).`);
+      return;
+    }
     setTransferring(true);
     try {
       const args = [
