@@ -57,6 +57,9 @@ export default function DropZone({ onFileHashed, disabled = false }: DropZonePro
         className={`drop-zone flex flex-col items-center justify-center gap-3 p-8 text-center transition-all ${
           dragging ? 'active' : ''
         } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        role="button"
+        aria-label="Drop zone — drag and drop a file or click to browse"
+        tabIndex={disabled ? -1 : 0}
       >
         <input
           ref={inputRef}
