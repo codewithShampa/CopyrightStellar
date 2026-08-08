@@ -25,7 +25,7 @@ export default function TxStatusIndicator({ status, txHash, explorerLink, succes
   const config = STATUS_CONFIG[status];
 
   return (
-    <div className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium ${config.color} bg-surface-800/50 border border-surface-600/30`}>
+    <div className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium ${config.color} bg-surface-800/50 border border-surface-600/30`} role="status" aria-live="polite">
       {config.icon === 'spin' && <HiOutlineArrowPath className="h-4 w-4 animate-spin" />}
       {config.icon === 'check' && <HiOutlineCheckCircle className="h-4 w-4" />}
       {config.icon === 'x' && <HiOutlineXCircle className="h-4 w-4" />}
