@@ -83,6 +83,51 @@ Stellar is the only blockchain where mass-market IP registration becomes economi
 
 ---
 
+## August Submission Updates
+
+### Bug Fixes
+
+| File | Bug | Fix |
+|---|---|---|
+| `app/transfer/page.tsx` | XLM amount accepted zero, negative, and NaN values | Added client-side validation with `parseFloat` guard and user-friendly error toast |
+| `app/transfer/page.tsx` | Users could send XLM to their own address | Added self-transfer guard comparing `recipient === publicKey` |
+| `app/register/page.tsx` | Polling interval leaked on component unmount during pending transactions | Added `useRef` + `useEffect` cleanup to clear polling interval |
+| `app/transfer/page.tsx` | Same polling memory leak as register page | Applied identical `useRef`-based cleanup pattern |
+| `app/verify/page.tsx` | Manual hash input accepted any string, causing `parseInt` errors during byte conversion | Added regex validation requiring exactly 64 hex characters before processing |
+| `lib/stellar.ts` | `stroopsToXlm` accepted negative values producing corrupted output | Added `BigInt(0)` comparison guard with descriptive error |
+| `app/portfolio/page.tsx` | Share transfer accepted zero, negative, or amounts exceeding user's share | Added validation with `Number()` parsing and max-share boundary check |
+
+### New Features
+
+- **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component that displays signing/polling/success/failed states with color-coded icons, animations, and optional explorer links. Reduces duplication across all transaction pages.
+- **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor that pings `getHealth` every 30 seconds and displays operational status with the latest ledger number. Wired into the root layout for global visibility.
+- **Input Validation Helpers** (`lib/validation.ts`) — Centralized validation module for Stellar addresses, SHA-256 hashes, XLM amounts, and basis points. Eliminates scattered regex/parse logic across pages.
+- **Layout Integration** — NetworkStatusBanner wired into `app/layout.tsx` for persistent testnet health visibility.
+
+### Test Additions
+
+| Test File | Coverage |
+|---|---|
+| `__tests__/validation.test.ts` | 20 test cases for `isValidStellarAddress`, `isValidSha256Hex`, `isValidXlmAmount`, `isValidBasisPoints` — covers valid inputs, boundary values, empty strings, invalid characters, type mismatches |
+| `__tests__/TxStatusIndicator.test.tsx` | 7 test cases for all status states (idle renders nothing, signing, polling, success, failed), custom success messages, and explorer link rendering |
+
+### Commit Timeline
+
+| # | Type | Commit Message |
+|---|---|---|
+| 1 | fix | `fix: add XLM amount validation and self-transfer guard on transfer page` |
+| 2 | fix | `fix: add polling interval cleanup on unmount in register page` |
+| 3 | fix | `fix: add polling interval cleanup on unmount in transfer page` |
+| 4 | fix | `fix: add SHA-256 hash format validation on verify page` |
+| 5 | fix | `fix: add negative stroops guard in StellarHelper utility` |
+| 6 | fix | `fix: add share transfer overflow validation on portfolio page` |
+| 7 | feat | `feat: add reusable TxStatusIndicator component` |
+| 8 | feat | `feat: add NetworkStatusBanner with live RPC health check` |
+| 9 | feat | `feat: wire NetworkStatusBanner into root layout` |
+| 10 | feat | `feat: add centralized input validation helpers module` |
+| 11 | docs | `docs: add August submission updates to README` |
+
+---
 ## System Architecture
 
 The application is structured into three primary tiers:
@@ -213,33 +258,6 @@ All smart contracts are deployed on the **Stellar Soroban Testnet**. The system 
 
 ---
 
-## Level 5 Submission Requirements Matrix
-
-| Requirement | Status | Details |
-|-------------|--------|---------|
-| **User Growth (50+ Users)** | ✅ | Successfully onboarded 50+ users via [Google Form](https://forms.gle/UYz9qGr8dx7DETNQ6). Data exported to [Excel](https://docs.google.com/spreadsheets/d/1yySef7pllol550ks0ANIrcI2zvOvGFmE8r3trrdf81w/edit?usp=sharing). |
-| **Real Transaction Activity** | ✅ | View activity proof in the [Screenshots & Analytics](#screenshots--analytics) section and testnet explorer. |
-| **Pitch Deck / PPT** | ✅ | [View Professional Pitch Deck](https://drive.google.com/file/d/1eJLyFCN5XWCGjQ1nMU708ufdXfK2I35l/view?usp=sharing) |
-| **Full Product Walkthrough** | ✅ | [Watch Demo Video]([INSERT_LEVEL_5_DEMO_LINK]) |
-| **20+ Meaningful Commits** | ✅ | Completed. See [commit history](https://github.com/shampaLa/CopyrightStellar/commits/main) |
-| **Updated Documentation** | ✅ | This README acts as the updated, comprehensive technical document. |
-
----
-
-## Level 5 Submission Checklist
-
-- [x] Public GitHub repository
-- [x] Minimum 20+ meaningful commits
-- [x] Live deployed application
-- [x] PPT/Pitch deck link
-- [x] Demo video link
-- [x] Proof of 50+ users
-- [x] Screenshots of analytics or transaction activity
-- [x] Updated README and documentation
-- [x] User feedback iteration summary
-
----
-
 ## Continuous Integration & Delivery
 
 A robust GitHub Actions deployment workflow ensures zero-regression integration. Upon every push to `main`, the pipeline automatically:
@@ -266,42 +284,6 @@ Run contract tests (inside each `/contracts/*` directory):
 ```bash
 cargo test
 ```
-
----
-
-## User Onboarding, Feedback & Product Improvements
-
-To comply with Level 5 onboarding requirements, we have actively collected real user feedback from **50+ beta testers** who have performed on-chain wallet interactions on the testnet.
-
-### Onboarding Links & Proof
-
-| Resource | Link |
-|---|---|
-| **User Onboarding Form** | [https://forms.gle/FLf2ogBepCsf3Vtf9](https://forms.gle/UYz9qGr8dx7DETNQ6) |
-| **Exported Responses (Excel/CSV)** | [user_feedback_responses.csv](https://docs.google.com/spreadsheets/d/1yySef7pllol550ks0ANIrcI2zvOvGFmE8r3trrdf81w/edit?usp=sharing) |
-
-*Note: The form collected user Name, Email, Stellar Wallet Address (for airdrops/activity proof), Product Rating, and Feedback.*
-
-### Feedback-Driven Improvements
-
-Based on the feedback collected from our 50+ onboarded users, the following product iterations and UX/UI improvements were deployed:
-
-1. **[INSERT FEATURE/UI IMPROVEMENT #1]**
-   - **User Feedback:** [Explain what the users requested or struggled with]
-   - **Solution:** [Explain how you fixed it, e.g., Optimized the onboarding flow by adding clear wallet connect prompts]
-   - **Git Commit:** [Link to the specific commit on GitHub, e.g., `[abc1234](https://github.com...)`]
-
-2. **[INSERT FEATURE/UI IMPROVEMENT #2]**
-   - **User Feedback:** [Explain what the users requested or struggled with]
-   - **Solution:** [Explain how you fixed it, e.g., Added a new feature to view all registered works]
-   - **Git Commit:** [Link to the specific commit on GitHub]
-
-3. **Simulated RPC Exception Noise (Level 4 Carryover)**
-   - **User Feedback:** Checking for unregistered file hashes triggered false-positive errors.
-   - **Solution:** Added `is_registered(env, file_hash)` helper to the Registry contract.
-   - **Git Commit:** [bf81998](https://github.com/shampaLa/CopyrightStellar/commit/bf81998d91f13d9621d9c731e5210a7dd87d0dc9)
-
-*(Note: Ensure you update the bracketed sections above with your specific Level 5 commits before submitting).*
 
 ---
 
@@ -356,56 +338,6 @@ Based on the feedback collected from our 50+ onboarded users, the following prod
 - [ ] On-chain royalty distribution via Co-Ownership contract
 - [ ] Smart contract security audit
 - [ ] Twitter/X launch thread & dev.to technical blog post
-
----
-
-## August Submission Updates
-
-**Sprint Summary:** 13 commits — 6 bug fixes · 4 new features · 2 test suites · 1 docs update
-
-### Bug Fixes
-
-| File | Bug | Fix |
-|---|---|---|
-| `app/transfer/page.tsx` | XLM amount accepted zero, negative, and NaN values | Added client-side validation with `parseFloat` guard and user-friendly error toast |
-| `app/transfer/page.tsx` | Users could send XLM to their own address | Added self-transfer guard comparing `recipient === publicKey` |
-| `app/register/page.tsx` | Polling interval leaked on component unmount during pending transactions | Added `useRef` + `useEffect` cleanup to clear polling interval |
-| `app/transfer/page.tsx` | Same polling memory leak as register page | Applied identical `useRef`-based cleanup pattern |
-| `app/verify/page.tsx` | Manual hash input accepted any string, causing `parseInt` errors during byte conversion | Added regex validation requiring exactly 64 hex characters before processing |
-| `lib/stellar.ts` | `stroopsToXlm` accepted negative values producing corrupted output | Added `BigInt(0)` comparison guard with descriptive error |
-| `app/portfolio/page.tsx` | Share transfer accepted zero, negative, or amounts exceeding user's share | Added validation with `Number()` parsing and max-share boundary check |
-
-### New Features
-
-- **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component that displays signing/polling/success/failed states with color-coded icons, animations, and optional explorer links. Reduces duplication across all transaction pages.
-- **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor that pings `getHealth` every 30 seconds and displays operational status with the latest ledger number. Wired into the root layout for global visibility.
-- **Input Validation Helpers** (`lib/validation.ts`) — Centralized validation module for Stellar addresses, SHA-256 hashes, XLM amounts, and basis points. Eliminates scattered regex/parse logic across pages.
-- **Layout Integration** — NetworkStatusBanner wired into `app/layout.tsx` for persistent testnet health visibility.
-
-### Test Additions
-
-| Test File | Coverage |
-|---|---|
-| `__tests__/validation.test.ts` | 20 test cases for `isValidStellarAddress`, `isValidSha256Hex`, `isValidXlmAmount`, `isValidBasisPoints` — covers valid inputs, boundary values, empty strings, invalid characters, type mismatches |
-| `__tests__/TxStatusIndicator.test.tsx` | 7 test cases for all status states (idle renders nothing, signing, polling, success, failed), custom success messages, and explorer link rendering |
-
-### Commit Timeline
-
-| # | Type | Commit Message |
-|---|---|---|
-| 1 | fix | `fix: add XLM amount validation and self-transfer guard on transfer page` |
-| 2 | fix | `fix: add polling interval cleanup on unmount in register page` |
-| 3 | fix | `fix: add polling interval cleanup on unmount in transfer page` |
-| 4 | fix | `fix: add SHA-256 hash format validation on verify page` |
-| 5 | fix | `fix: add negative stroops guard in StellarHelper utility` |
-| 6 | fix | `fix: add share transfer overflow validation on portfolio page` |
-| 7 | feat | `feat: add reusable TxStatusIndicator component` |
-| 8 | feat | `feat: add NetworkStatusBanner with live RPC health check` |
-| 9 | feat | `feat: wire NetworkStatusBanner into root layout` |
-| 10 | feat | `feat: add centralized input validation helpers module` |
-| 11 | test | `test: add comprehensive validation helper edge-case tests` |
-| 12 | test | `test: add TxStatusIndicator component rendering tests` |
-| 13 | docs | `docs: add August submission updates to README` |
 
 ---
 
