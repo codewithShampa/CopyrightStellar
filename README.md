@@ -217,10 +217,9 @@ All smart contracts are deployed on the **Stellar Soroban Testnet**. The system 
 
 | Requirement | Status | Details |
 |-------------|--------|---------|
-| **User Growth (50+ Users)** | ✅ | Successfully onboarded 50+ users via [Google Form](https://forms.gle/FLf2ogBepCsf3Vtf9). Data exported to [Excel/CSV](./user_feedback_responses.csv). |
+| **User Growth (50+ Users)** | ✅ | Successfully onboarded 50+ users via [Google Form](https://forms.gle/UYz9qGr8dx7DETNQ6). Data exported to [Excel](https://docs.google.com/spreadsheets/d/1yySef7pllol550ks0ANIrcI2zvOvGFmE8r3trrdf81w/edit?usp=sharing). |
 | **Real Transaction Activity** | ✅ | View activity proof in the [Screenshots & Analytics](#screenshots--analytics) section and testnet explorer. |
-| **Product Improvements** | ✅ | Implemented new features and UI/UX upgrades based on user feedback. Details in [Feedback Iteration Section](#feedback-driven-improvements). |
-| **Pitch Deck / PPT** | ✅ | [View Professional Pitch Deck](https://docs.google.com/presentation/d/1XLSxe06cF8xWizxYojb00pld6w8yaxFN3qFR1Mx298w/edit?usp=sharing) |
+| **Pitch Deck / PPT** | ✅ | [View Professional Pitch Deck](https://drive.google.com/file/d/1eJLyFCN5XWCGjQ1nMU708ufdXfK2I35l/view?usp=sharing) |
 | **Full Product Walkthrough** | ✅ | [Watch Demo Video]([INSERT_LEVEL_5_DEMO_LINK]) |
 | **20+ Meaningful Commits** | ✅ | Completed. See [commit history](https://github.com/shampaLa/CopyrightStellar/commits/main) |
 | **Updated Documentation** | ✅ | This README acts as the updated, comprehensive technical document. |
@@ -278,8 +277,8 @@ To comply with Level 5 onboarding requirements, we have actively collected real 
 
 | Resource | Link |
 |---|---|
-| **User Onboarding Form** | [https://forms.gle/FLf2ogBepCsf3Vtf9](https://forms.gle/FLf2ogBepCsf3Vtf9) |
-| **Exported Responses (Excel/CSV)** | [user_feedback_responses.csv](./user_feedback_responses.csv) |
+| **User Onboarding Form** | [https://forms.gle/FLf2ogBepCsf3Vtf9](https://forms.gle/UYz9qGr8dx7DETNQ6) |
+| **Exported Responses (Excel/CSV)** | [user_feedback_responses.csv](https://docs.google.com/spreadsheets/d/1yySef7pllol550ks0ANIrcI2zvOvGFmE8r3trrdf81w/edit?usp=sharing) |
 
 *Note: The form collected user Name, Email, Stellar Wallet Address (for airdrops/activity proof), Product Rating, and Feedback.*
 
@@ -417,7 +416,7 @@ This software is provided under the [MIT License](./LICENSE).
 ---
 
 <div align="center">
-  <p>Built with ❤️ on <a href="https://stellar.org">Stellar Soroban</a> by <a href="https://github.com/shampaLa">shampaLa</a></p>
+  <p>Built with ❤️ on <a href="https://stellar.org">Stellar Soroban</a> by <a href="https://github.com/codewithShampa">codewithShampa</a></p>
   <p>
     <a href="https://shiny-puppy-c4fb73.netlify.app/">Live App</a> •
     <a href="https://forms.gle/FLf2ogBepCsf3Vtf9">Beta Feedback Form</a> •
