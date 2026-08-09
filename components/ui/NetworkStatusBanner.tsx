@@ -69,7 +69,7 @@ export default function NetworkStatusBanner() {
   const config = HEALTH_CONFIG[health];
 
   return (
-    <div className={`flex items-center justify-center gap-2 py-1.5 text-xs font-medium border-b ${config.bg}`}>
+    <div className={`flex items-center justify-center gap-2 py-1.5 text-xs font-medium border-b ${config.bg}`} role="status" aria-label="Network status">
       <span className={`h-1.5 w-1.5 rounded-full ${config.dot}`} />
       <span className="text-slate-300">{config.label}</span>
       {latestLedger && (
