@@ -20,8 +20,8 @@ export default function Badge({ label }: { label: string }) {
   };
 
   return (
-    <span className={`status-badge ${colors.bg} ${colors.text}`}>
-      <span className={`h-1.5 w-1.5 rounded-full ${colors.dot}`} />
+    <span className={`status-badge ${colors.bg} ${colors.text}`} role="status" aria-label={`Status: ${label}`}>
+      <span className={`h-1.5 w-1.5 rounded-full ${colors.dot}`} aria-hidden="true" />
       {label}
     </span>
   );
