@@ -43,9 +43,10 @@ export default function Certificate({ id, title, creator, fileHash, timestamp, n
       <button 
         onClick={downloadCertificate}
         disabled={downloading}
+        aria-label="Download official copyright registration certificate as PNG"
         className="btn-secondary w-full flex items-center justify-center gap-2 text-sm py-2"
       >
-        <HiOutlineArrowDownTray className="h-4 w-4" />
+        <HiOutlineArrowDownTray className="h-4 w-4" aria-hidden="true" />
         {downloading ? 'Generating...' : 'Download Official Certificate'}
       </button>
 
