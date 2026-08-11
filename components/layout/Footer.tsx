@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-900/20 bg-surface-950/60 py-8 mt-20">
+    <footer className="border-t border-brand-900/20 bg-surface-950/60 py-8 mt-20" role="contentinfo">
       <div className="mx-auto max-w-7xl px-4 text-center">
         <p className="text-xs text-slate-500">
           &copy; {new Date().getFullYear()} CopyrightStellar — Decentralized IP & Copyright Registry on Stellar Soroban
