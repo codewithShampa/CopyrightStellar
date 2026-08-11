@@ -65,6 +65,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-1.5 text-xs font-semibold text-amber-400 hover:bg-amber-500/20 transition-all animate-pulse"
+            title="Share your experience using CopyrightStellar"
           >
             Onboarding Feedback
           </a>
