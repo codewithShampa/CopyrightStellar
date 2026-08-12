@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="relative overflow-hidden">
+      <main className="relative overflow-hidden" role="main" aria-label="CopyrightStellar homepage">
         {/* Hero Glow Effects */}
         <div className="hero-glow top-[-200px] left-[20%]" />
         <div className="hero-glow top-[100px] right-[-100px]" style={{ background: 'radial-gradient(circle, rgba(81,218,217,0.1), transparent 70%)' }} />
