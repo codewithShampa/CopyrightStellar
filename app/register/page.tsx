@@ -126,7 +126,7 @@ export default function RegisterPage() {
               <h2 className="text-sm font-semibold text-slate-300 mb-2">Step 2 — Work Details</h2>
 
               <div>
-                <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Title *</label>
+                <label htmlFor="register-title" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Title *</label>
                 <input
                   id="register-title"
                   type="text"
@@ -138,7 +138,7 @@ export default function RegisterPage() {
               </div>
 
               <div>
-                <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Description</label>
+                <label htmlFor="register-description" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Description</label>
                 <textarea
                   id="register-description"
                   value={description}
