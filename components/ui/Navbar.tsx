@@ -24,7 +24,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-brand-900/30 bg-surface-950/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 border-b border-brand-900/30 bg-surface-950/80 backdrop-blur-xl" aria-label="Main Navigation">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
