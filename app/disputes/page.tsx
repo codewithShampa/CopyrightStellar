@@ -210,7 +210,7 @@ export default function DisputesPage() {
         ) : (
           <>
             {/* Tabs */}
-            <div className="flex gap-2 mb-8">
+            <div className="flex gap-2 mb-8" aria-label="Dispute tabs">
               {[
                 { id: 'file', label: 'File Dispute' },
                 { id: 'vote', label: 'Vote' },
