@@ -151,7 +151,7 @@ export default function VerifyPage() {
 
             {/* Result */}
             {result && (
-              <div className={`glass-card p-6 ${result.found ? 'border-emerald-800/30' : 'border-amber-800/30'}`}>
+              <div className={`glass-card p-6 ${result.found ? 'border-emerald-800/30' : 'border-amber-800/30'}`} aria-live="polite">
                 {result.found ? (
                   <>
                     <div className="flex items-center gap-3 mb-4">
