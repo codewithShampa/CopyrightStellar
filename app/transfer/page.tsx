@@ -96,6 +96,7 @@ export default function TransferPage() {
                 onChange={(e) => setRecipient(e.target.value)}
                 placeholder="G... Stellar address"
                 className="input-field font-mono text-sm"
+                required
               />
             </div>
 
