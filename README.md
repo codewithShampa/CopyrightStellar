@@ -17,7 +17,6 @@
     <img src="https://img.shields.io/badge/Level-5%20Submission-purple" alt="Level 5" />
   </p>
 </div>
-> **🔔 August 2026 Sprint Complete** — 23 commits across 8 days: 6 bug fixes · 4 features · 2 test suites · 1 docs update · 10 minor enhancements. [Jump to August Submission Updates ↓](#august-submission-updates)
 ---
 
 ## Table of Contents
