@@ -88,7 +88,7 @@ export default function TransferPage() {
             </div>
 
             <div>
-              <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Recipient Address</label>
+              <label htmlFor="transfer-recipient" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Recipient Address</label>
               <input
                 id="transfer-recipient"
                 type="text"
@@ -101,7 +101,7 @@ export default function TransferPage() {
             </div>
 
             <div>
-              <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Amount (XLM)</label>
+              <label htmlFor="transfer-amount" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Amount (XLM)</label>
               <input
                 id="transfer-amount"
                 type="number"
