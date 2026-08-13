@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import Navbar from '@/components/ui/Navbar';
@@ -65,7 +65,7 @@ export default function LicensesPage() {
 
       setTxHash(hash);
       setTxStatus('polling');
-      toast.loading('Creating license on-chain…', { id: 'license' });
+      toast.loading('Creating license on-chainâ€¦', { id: 'license' });
 
       const poll = setInterval(async () => {
         const result = await stellar.pollTransaction(hash);
@@ -104,7 +104,7 @@ export default function LicensesPage() {
         args,
       });
 
-      toast.loading('Granting access…', { id: 'grant' });
+      toast.loading('Granting accessâ€¦', { id: 'grant' });
 
       const poll = setInterval(async () => {
         const result = await stellar.pollTransaction(hash);
@@ -215,7 +215,7 @@ export default function LicensesPage() {
                   {txStatus === 'signing' || txStatus === 'polling' ? (
                     <>
                       <HiOutlineArrowPath className="h-4 w-4 animate-spin" />
-                      {txStatus === 'signing' ? 'Signing…' : 'Creating…'}
+                      {txStatus === 'signing' ? 'Signingâ€¦' : 'Creatingâ€¦'}
                     </>
                   ) : (
                     <>
@@ -227,7 +227,7 @@ export default function LicensesPage() {
 
                 {txStatus === 'success' && txHash && (
                   <div className="glass-card p-6 border-emerald-800/30">
-                    <h3 className="text-sm font-semibold text-emerald-400 mb-3">✓ License Created</h3>
+                    <h3 className="text-sm font-semibold text-emerald-400 mb-3">âœ“ License Created</h3>
                     <div>
                       <p className="text-[10px] text-slate-500 uppercase tracking-wider">Transaction</p>
                       <a
@@ -277,7 +277,7 @@ export default function LicensesPage() {
                       className="btn-primary flex-1 flex items-center justify-center gap-2 text-sm"
                     >
                       <HiOutlineKey className="h-4 w-4" />
-                      {granting ? 'Granting…' : 'Grant Access'}
+                      {granting ? 'Grantingâ€¦' : 'Grant Access'}
                     </button>
                   </div>
                 </div>
@@ -290,5 +290,3 @@ export default function LicensesPage() {
     </>
   );
 }
-   
- 
