@@ -17,6 +17,7 @@
     <img src="https://img.shields.io/badge/Level-5%20Submission-purple" alt="Level 5" />
   </p>
 </div>
+> **🔔 August 2026 Sprint Complete** — 23 commits across 8 days: 6 bug fixes · 4 features · 2 test suites · 1 docs update · 10 minor enhancements. [Jump to August Submission Updates ↓](#august-submission-updates)
 ---
 
 ## Table of Contents
@@ -335,6 +336,56 @@ cargo test
 - [ ] On-chain royalty distribution via Co-Ownership contract
 - [ ] Smart contract security audit
 - [ ] Twitter/X launch thread & dev.to technical blog post
+
+---
+
+## August Submission Updates
+
+**Sprint Summary:** 23 commits — 6 bug fixes · 4 new features · 2 test suites · 1 docs update · 10 minor enhancements
+
+### Bug Fixes
+
+| File | Bug | Fix |
+|---|---|---|
+| `app/transfer/page.tsx` | XLM amount accepted zero, negative, and NaN values | Added client-side validation with `parseFloat` guard and user-friendly error toast |
+| `app/transfer/page.tsx` | Users could send XLM to their own address | Added self-transfer guard comparing `recipient === publicKey` |
+| `app/register/page.tsx` | Polling interval leaked on component unmount during pending transactions | Added `useRef` + `useEffect` cleanup to clear polling interval |
+| `app/transfer/page.tsx` | Same polling memory leak as register page | Applied identical `useRef`-based cleanup pattern |
+| `app/verify/page.tsx` | Manual hash input accepted any string, causing `parseInt` errors during byte conversion | Added regex validation requiring exactly 64 hex characters before processing |
+| `lib/stellar.ts` | `stroopsToXlm` accepted negative values producing corrupted output | Added `BigInt(0)` comparison guard with descriptive error |
+| `app/portfolio/page.tsx` | Share transfer accepted zero, negative, or amounts exceeding user's share | Added validation with `Number()` parsing and max-share boundary check |
+
+### New Features
+
+- **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component that displays signing/polling/success/failed states with color-coded icons, animations, and optional explorer links. Reduces duplication across all transaction pages.
+- **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor that pings `getHealth` every 30 seconds and displays operational status with the latest ledger number. Wired into the root layout for global visibility.
+- **Input Validation Helpers** (`lib/validation.ts`) — Centralized validation module for Stellar addresses, SHA-256 hashes, XLM amounts, and basis points. Eliminates scattered regex/parse logic across pages.
+- **Layout Integration** — NetworkStatusBanner wired into `app/layout.tsx` for persistent testnet health visibility.
+
+### Test Additions
+
+| Test File | Coverage |
+|---|---|
+| `__tests__/validation.test.ts` | 20 test cases for `isValidStellarAddress`, `isValidSha256Hex`, `isValidXlmAmount`, `isValidBasisPoints` — covers valid inputs, boundary values, empty strings, invalid characters, type mismatches |
+| `__tests__/TxStatusIndicator.test.tsx` | 7 test cases for all status states (idle renders nothing, signing, polling, success, failed), custom success messages, and explorer link rendering |
+
+### Commit Timeline
+
+| # | Type | Commit Message |
+|---|---|---|
+| 1 | fix | `fix: add XLM amount validation and self-transfer guard on transfer page` |
+| 2 | fix | `fix: add polling interval cleanup on unmount in register page` |
+| 3 | fix | `fix: add polling interval cleanup on unmount in transfer page` |
+| 4 | fix | `fix: add SHA-256 hash format validation on verify page` |
+| 5 | fix | `fix: add negative stroops guard in StellarHelper utility` |
+| 6 | fix | `fix: add share transfer overflow validation on portfolio page` |
+| 7 | feat | `feat: add reusable TxStatusIndicator component` |
+| 8 | feat | `feat: add NetworkStatusBanner with live RPC health check` |
+| 9 | feat | `feat: wire NetworkStatusBanner into root layout` |
+| 10 | feat | `feat: add centralized input validation helpers module` |
+| 11 | test | `test: add comprehensive validation helper edge-case tests` |
+| 12 | test | `test: add TxStatusIndicator component rendering tests` |
+| 13 | docs | `docs: add August submission updates to README` |
 
 ---
 
