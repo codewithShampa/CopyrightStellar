@@ -114,7 +114,7 @@ export default function RegisterPage() {
             <p className="text-slate-400">Connect your wallet to register works.</p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-6" aria-label="Registration Options">
             {/* File Drop Zone */}
             <div className="glass-card p-6">
               <h2 className="text-sm font-semibold text-slate-300 mb-4">Step 1 — Hash Your File</h2>
