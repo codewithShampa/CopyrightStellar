@@ -3,7 +3,10 @@
  * Centralizes validation logic that was previously scattered across pages.
  */
 
-/** Validates a Stellar public key format (G... , 56 chars, base32) */
+/** 
+ * Validates a Stellar public key format (G... , 56 chars, base32) 
+ * @param address The string to validate
+ */
 export function isValidStellarAddress(address: string): boolean {
   return /^G[A-Z2-7]{54,55}$/.test(address);
 }
