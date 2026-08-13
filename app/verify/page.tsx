@@ -118,7 +118,7 @@ export default function VerifyPage() {
 
             {/* Manual Hash Input */}
             <div className="glass-card p-6">
-              <h2 className="text-sm font-semibold text-slate-300 mb-4">Option B — Paste a Hash</h2>
+              <h2 className="text-sm font-semibold text-slate-300 mb-4"><label htmlFor="verify-manual-hash">Option B — Paste a Hash</label></h2>
               <input
                 id="verify-manual-hash"
                 type="text"
