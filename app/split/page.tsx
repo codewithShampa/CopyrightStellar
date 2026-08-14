@@ -108,7 +108,7 @@ export default function SplitPage() {
   return (
     <>
       <Navbar />
-      <main className="mx-auto max-w-2xl px-4 py-12">
+      <main className="mx-auto max-w-2xl px-4 py-12" aria-label="Split sheet registration">
         <h1 className="text-3xl font-bold mb-2">
           <span className="gradient-text">Split Sheet</span>
         </h1>
