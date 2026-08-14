@@ -150,7 +150,7 @@ export default function PortfolioPage() {
   return (
     <>
       <Navbar />
-      <main className="mx-auto max-w-4xl px-4 py-12">
+      <main className="mx-auto max-w-4xl px-4 py-12" aria-label="IP portfolio dashboard">
         <h1 className="text-3xl font-bold mb-2">
           <span className="gradient-text">IP Portfolio</span>
         </h1>
