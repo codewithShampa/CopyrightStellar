@@ -340,9 +340,9 @@ cargo test
 
 ## August Submission Updates
 
-**Sprint Summary:** 23 commits — 6 bug fixes · 4 new features · 2 test suites · 1 docs update · 10 minor enhancements
+**Sprint Summary:** 50+ total commits across August 1–15 — 6 critical bug fixes · 8 architectural features · 5 custom hooks & utilities · 8 test suites (62 unit tests passing) · 15+ accessibility & UI enhancements
 
-### Bug Fixes
+### Key Bug Fixes & Resiliency
 
 | File | Bug | Fix |
 |---|---|---|
@@ -354,37 +354,28 @@ cargo test
 | `lib/stellar.ts` | `stroopsToXlm` accepted negative values producing corrupted output | Added `BigInt(0)` comparison guard with descriptive error |
 | `app/portfolio/page.tsx` | Share transfer accepted zero, negative, or amounts exceeding user's share | Added validation with `Number()` parsing and max-share boundary check |
 
-### New Features
+### Core Architecture & Utility Modules
 
-- **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component that displays signing/polling/success/failed states with color-coded icons, animations, and optional explorer links. Reduces duplication across all transaction pages.
-- **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor that pings `getHealth` every 30 seconds and displays operational status with the latest ledger number. Wired into the root layout for global visibility.
-- **Input Validation Helpers** (`lib/validation.ts`) — Centralized validation module for Stellar addresses, SHA-256 hashes, XLM amounts, and basis points. Eliminates scattered regex/parse logic across pages.
-- **Layout Integration** — NetworkStatusBanner wired into `app/layout.tsx` for persistent testnet health visibility.
+- **Centralized Configuration** (`lib/config.ts`) — Defines standard timing constants, polling intervals (2000ms), and validation limits.
+- **Typed Error Handling** (`lib/errors.ts`) — Custom `AppError`, `WalletError`, `ContractError`, `ValidationError`, and `NetworkError` hierarchy with `getErrorMessage` helper.
+- **Display Formatters** (`lib/format.ts`) — Formatters for Stellar address truncation, human-readable file sizes, Unix timestamps, and basis points percentages.
+- **Input Validation Helpers** (`lib/validation.ts`) — Centralized validation module for Stellar addresses, SHA-256 hashes, XLM amounts, work IDs, titles, and basis points.
+- **Custom React Hooks** (`hooks/useTxPolling.ts`, `hooks/useFileHash.ts`) — Encapsulates asynchronous polling loops and SubtleCrypto SHA-256 hashing.
+- **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component with `role="status"` and `aria-live="polite"`.
+- **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor with live ledger sequence tracking.
 
-### Test Additions
+### Comprehensive Test Suite (62 Tests Passing)
 
-| Test File | Coverage |
-|---|---|
-| `__tests__/validation.test.ts` | 20 test cases for `isValidStellarAddress`, `isValidSha256Hex`, `isValidXlmAmount`, `isValidBasisPoints` — covers valid inputs, boundary values, empty strings, invalid characters, type mismatches |
-| `__tests__/TxStatusIndicator.test.tsx` | 7 test cases for all status states (idle renders nothing, signing, polling, success, failed), custom success messages, and explorer link rendering |
-
-### Commit Timeline
-
-| # | Type | Commit Message |
+| Test File | Tests | Coverage Areas |
 |---|---|---|
-| 1 | fix | `fix: add XLM amount validation and self-transfer guard on transfer page` |
-| 2 | fix | `fix: add polling interval cleanup on unmount in register page` |
-| 3 | fix | `fix: add polling interval cleanup on unmount in transfer page` |
-| 4 | fix | `fix: add SHA-256 hash format validation on verify page` |
-| 5 | fix | `fix: add negative stroops guard in StellarHelper utility` |
-| 6 | fix | `fix: add share transfer overflow validation on portfolio page` |
-| 7 | feat | `feat: add reusable TxStatusIndicator component` |
-| 8 | feat | `feat: add NetworkStatusBanner with live RPC health check` |
-| 9 | feat | `feat: wire NetworkStatusBanner into root layout` |
-| 10 | feat | `feat: add centralized input validation helpers module` |
-| 11 | test | `test: add comprehensive validation helper edge-case tests` |
-| 12 | test | `test: add TxStatusIndicator component rendering tests` |
-| 13 | docs | `docs: add August submission updates to README` |
+| `__tests__/validation.test.ts` | 20 | Stellar addresses, SHA-256 hashes, XLM amounts, basis points |
+| `__tests__/validation_extended.test.ts` | 7 | Work IDs, title lengths, boundary conditions |
+| `__tests__/format.test.ts` | 14 | Address truncation, file size scaling, timestamps, percentages |
+| `__tests__/errors.test.ts` | 9 | Custom error classes hierarchy, error extraction fallbacks |
+| `__tests__/stellar.test.ts` | 5 | Address formatting, stroops-to-XLM roundtrip conversions |
+| `__tests__/TxStatusIndicator.test.tsx` | 7 | Idle, signing, polling, success, failed states, explorer links |
+| `__tests__/Badge.test.tsx` | 4 | Color mapping, normalization, fallback states |
+| `__tests__/DropZone.test.tsx` | 3 | Upload prompts, privacy notices, disabled states |
 
 ---
 
