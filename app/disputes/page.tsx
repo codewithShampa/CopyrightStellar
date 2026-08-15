@@ -237,8 +237,9 @@ export default function DisputesPage() {
                   <h2 className="text-sm font-semibold text-slate-300 mb-2">File a Plagiarism Dispute</h2>
 
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Defendant Address *</label>
+                    <label htmlFor="dispute-defendant" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Defendant Address *</label>
                     <input
+                      id="dispute-defendant"
                       type="text"
                       value={defendant}
                       onChange={(e) => setDefendant(e.target.value)}
@@ -248,8 +249,9 @@ export default function DisputesPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Work ID *</label>
+                    <label htmlFor="dispute-work-id" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Work ID *</label>
                     <input
+                      id="dispute-work-id"
                       type="number"
                       value={disputeWorkId}
                       onChange={(e) => setDisputeWorkId(e.target.value)}
@@ -259,8 +261,9 @@ export default function DisputesPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Evidence Hash</label>
+                    <label htmlFor="dispute-evidence-hash" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Evidence Hash</label>
                     <input
+                      id="dispute-evidence-hash"
                       type="text"
                       value={evidenceHash}
                       onChange={(e) => setEvidenceHash(e.target.value)}
@@ -313,8 +316,9 @@ export default function DisputesPage() {
                   <h2 className="text-sm font-semibold text-slate-300 mb-2">Cast a Quadratic Vote</h2>
 
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Dispute ID</label>
+                    <label htmlFor="vote-dispute-id" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">Dispute ID</label>
                     <input
+                      id="vote-dispute-id"
                       type="number"
                       value={voteDisputeId}
                       onChange={(e) => setVoteDisputeId(e.target.value)}
@@ -324,10 +328,11 @@ export default function DisputesPage() {
                   </div>
 
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">
+                    <label htmlFor="vote-count-input" className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1 block">
                       Number of Votes
                     </label>
                     <input
+                      id="vote-count-input"
                       type="number"
                       value={voteCount}
                       onChange={(e) => setVoteCount(e.target.value)}
