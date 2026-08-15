@@ -3,10 +3,9 @@
   <p><strong>A Decentralized Intellectual Property & Copyright Registry on Stellar Soroban</strong></p>
 
   <p>
-    <a href="https://shiny-puppy-c4fb73.netlify.app/">🌐 Live Demo</a> ••
+    <a href="https://shiny-puppy-c4fb73.netlify.app/">🌐 Live Demo</a> •
     <a href="https://docs.google.com/presentation/d/1XLSxe06cF8xWizxYojb00pld6w8yaxFN3qFR1Mx298w/edit?usp=sharing">📊 Pitch Deck</a> •
-    <a href="https://github.com/shampaLa/CopyrightStellar">📁 Repository</a> •
-    <a href="https://forms.gle/FLf2ogBepCsf3Vtf9">📝 Feedback Form</a>
+    <a href="https://github.com/shampaLa/CopyrightStellar">📁 Repository</a>
   </p>
 
   <p>
@@ -14,9 +13,9 @@
     <img src="https://img.shields.io/badge/Next.js-14-black?logo=next.js" alt="Next.js 14" />
     <img src="https://img.shields.io/badge/Rust-Contracts-orange?logo=rust" alt="Rust" />
     <img src="https://img.shields.io/badge/Deployed-Testnet-green" alt="Testnet" />
-    <img src="https://img.shields.io/badge/Level-5%20Submission-purple" alt="Level 5" />
   </p>
 </div>
+
 ---
 
 ## Table of Contents
@@ -27,13 +26,11 @@
 - [System Architecture](#system-architecture)
 - [Smart Contract Infrastructure](#smart-contract-infrastructure)
 - [Feature Walkthrough](#feature-walkthrough)
-- [Screenshots & Analytics](#screenshots--analytics)
-- [Level 5 Submission Requirements Matrix](#level-5-submission-requirements-matrix)
-- [Level 5 Submission Checklist](#level-5-submission-checklist)
+- [Screenshots](#screenshots)
 - [Continuous Integration & Delivery](#continuous-integration--delivery)
 - [Testing & Quality Assurance](#testing--quality-assurance)
-- [User Onboarding, Feedback & Product Improvements](#user-onboarding-feedback--product-improvements)
 - [Local Development Setup](#local-development-setup)
+- [August Submission Updates](#august-submission-updates)
 - [Roadmap](#roadmap)
 - [License](#license)
 
@@ -62,7 +59,7 @@ The global creative economy loses $600 billion+ annually to IP theft, licensing 
 - Small creators cannot afford lawyers or DMCA appeals when plagiarism occurs
 - Cross-border IP enforcement is practically impossible without expensive intermediaries
 
-I built CopyrightStellar to collapse all four of these problems into three smart contracts on Stellar.
+CopyrightStellar collapses all four of these problems into three smart contracts on Stellar.
 
 ---
 
@@ -80,51 +77,6 @@ Stellar is the only blockchain where mass-market IP registration becomes economi
 
 ---
 
-## August Submission Updates
-
-### Bug Fixes
-
-| File | Bug | Fix |
-|---|---|---|
-| `app/transfer/page.tsx` | XLM amount accepted zero, negative, and NaN values | Added client-side validation with `parseFloat` guard and user-friendly error toast |
-| `app/transfer/page.tsx` | Users could send XLM to their own address | Added self-transfer guard comparing `recipient === publicKey` |
-| `app/register/page.tsx` | Polling interval leaked on component unmount during pending transactions | Added `useRef` + `useEffect` cleanup to clear polling interval |
-| `app/transfer/page.tsx` | Same polling memory leak as register page | Applied identical `useRef`-based cleanup pattern |
-| `app/verify/page.tsx` | Manual hash input accepted any string, causing `parseInt` errors during byte conversion | Added regex validation requiring exactly 64 hex characters before processing |
-| `lib/stellar.ts` | `stroopsToXlm` accepted negative values producing corrupted output | Added `BigInt(0)` comparison guard with descriptive error |
-| `app/portfolio/page.tsx` | Share transfer accepted zero, negative, or amounts exceeding user's share | Added validation with `Number()` parsing and max-share boundary check |
-
-### New Features
-
-- **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component that displays signing/polling/success/failed states with color-coded icons, animations, and optional explorer links. Reduces duplication across all transaction pages.
-- **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor that pings `getHealth` every 30 seconds and displays operational status with the latest ledger number. Wired into the root layout for global visibility.
-- **Input Validation Helpers** (`lib/validation.ts`) — Centralized validation module for Stellar addresses, SHA-256 hashes, XLM amounts, and basis points. Eliminates scattered regex/parse logic across pages.
-- **Layout Integration** — NetworkStatusBanner wired into `app/layout.tsx` for persistent testnet health visibility.
-
-### Test Additions
-
-| Test File | Coverage |
-|---|---|
-| `__tests__/validation.test.ts` | 20 test cases for `isValidStellarAddress`, `isValidSha256Hex`, `isValidXlmAmount`, `isValidBasisPoints` — covers valid inputs, boundary values, empty strings, invalid characters, type mismatches |
-| `__tests__/TxStatusIndicator.test.tsx` | 7 test cases for all status states (idle renders nothing, signing, polling, success, failed), custom success messages, and explorer link rendering |
-
-### Commit Timeline
-
-| # | Type | Commit Message |
-|---|---|---|
-| 1 | fix | `fix: add XLM amount validation and self-transfer guard on transfer page` |
-| 2 | fix | `fix: add polling interval cleanup on unmount in register page` |
-| 3 | fix | `fix: add polling interval cleanup on unmount in transfer page` |
-| 4 | fix | `fix: add SHA-256 hash format validation on verify page` |
-| 5 | fix | `fix: add negative stroops guard in StellarHelper utility` |
-| 6 | fix | `fix: add share transfer overflow validation on portfolio page` |
-| 7 | feat | `feat: add reusable TxStatusIndicator component` |
-| 8 | feat | `feat: add NetworkStatusBanner with live RPC health check` |
-| 9 | feat | `feat: wire NetworkStatusBanner into root layout` |
-| 10 | feat | `feat: add centralized input validation helpers module` |
-| 11 | docs | `docs: add August submission updates to README` |
-
----
 ## System Architecture
 
 The application is structured into three primary tiers:
@@ -230,7 +182,7 @@ All smart contracts are deployed on the **Stellar Soroban Testnet**. The system 
 
 ---
 
-## Screenshots & Analytics
+## Screenshots
 
 ### Product UI
 
@@ -244,13 +196,6 @@ All smart contracts are deployed on the **Stellar Soroban Testnet**. The system 
 <div align="center">
   <img src="./assets/mobui.png" alt="CopyrightStellar — Mobile Responsive UI" width="320"/>
   <p><em>Full mobile-optimized layout tested on iOS and Android browsers</em></p>
-</div>
-
-### Analytics & Transaction Activity
-
-<div align="center">
-  <img src="./assets/analytics.png" alt="CopyrightStellar — Transaction Activity" width="860"/>
-  <p><em>Proof of real transaction activity and active usage from our onboarded testnet users</em></p>
 </div>
 
 ---
@@ -316,31 +261,9 @@ cargo test
 
 ---
 
-## Roadmap
-
-### Level 5 (Current — Growth & Presentation) ✅
-- [x] 50+ testnet users onboarded via Google Form
-- [x] Product improvements based on user feedback
-- [x] Real transaction activity and active usage proven
-- [x] Professional pitch deck completed
-- [x] Full product demo video recorded
-- [x] 20+ meaningful commits executed
-- [x] Documentation and README updated
-
-### Level 6 (Mainnet — Production) 🚀
-- [ ] Deploy all three contracts to Stellar Mainnet
-- [ ] Fee Bump / gasless onboarding (Black Belt feature)
-- [ ] SEP-24 anchor integration for fiat → XLM onramp
-- [ ] Public Creator Portfolios (`/portfolio/[address]`)
-- [ ] On-chain royalty distribution via Co-Ownership contract
-- [ ] Smart contract security audit
-- [ ] Twitter/X launch thread & dev.to technical blog post
-
----
-
 ## August Submission Updates
 
-**Sprint Summary:** 50+ total commits across August 1–15 — 6 critical bug fixes · 8 architectural features · 5 custom hooks & utilities · 8 test suites (62 unit tests passing) · 15+ accessibility & UI enhancements
+**Sprint Summary:** 50+ total commits across August 1–15 — 6 critical bug fixes · 8 architectural features · 5 custom hooks & utilities · 8 test suites (69 unit tests passing) · 15+ UI and accessibility enhancements
 
 ### Key Bug Fixes & Resiliency
 
@@ -364,7 +287,7 @@ cargo test
 - **Transaction Status Indicator** (`components/ui/TxStatusIndicator.tsx`) — Reusable component with `role="status"` and `aria-live="polite"`.
 - **Network Status Banner** (`components/ui/NetworkStatusBanner.tsx`) — Real-time Stellar RPC health monitor with live ledger sequence tracking.
 
-### Comprehensive Test Suite (62 Tests Passing)
+### Comprehensive Test Suite (69 Tests Passing)
 
 | Test File | Tests | Coverage Areas |
 |---|---|---|
@@ -379,6 +302,24 @@ cargo test
 
 ---
 
+## Roadmap
+
+### Current Phase (Testnet) ✅
+- [x] Core contracts deployed on Stellar Soroban Testnet
+- [x] Responsive Next.js 14 web application
+- [x] Comprehensive test suites and CI/CD pipelines
+- [x] Full product architecture and documentation
+
+### Future Phase (Mainnet — Production) 🚀
+- [ ] Deploy all three contracts to Stellar Mainnet
+- [ ] Fee Bump / gasless onboarding
+- [ ] SEP-24 anchor integration for fiat → XLM onramp
+- [ ] Public Creator Portfolios (`/portfolio/[address]`)
+- [ ] On-chain royalty distribution via Co-Ownership contract
+- [ ] Third-party smart contract security audit
+
+---
+
 ## License
 
 This software is provided under the [MIT License](./LICENSE).
@@ -389,7 +330,6 @@ This software is provided under the [MIT License](./LICENSE).
   <p>Built with ❤️ on <a href="https://stellar.org">Stellar Soroban</a> by <a href="https://github.com/codewithShampa">codewithShampa</a></p>
   <p>
     <a href="https://shiny-puppy-c4fb73.netlify.app/">Live App</a> •
-    <a href="https://forms.gle/FLf2ogBepCsf3Vtf9">Beta Feedback Form</a> •
-    <a href="[INSERT_LEVEL_5_DEMO_LINK]">Demo Video</a>
+    <a href="https://docs.google.com/presentation/d/1XLSxe06cF8xWizxYojb00pld6w8yaxFN3qFR1Mx298w/edit?usp=sharing">Pitch Deck</a>
   </p>
 </div>
