@@ -5,7 +5,8 @@
   <p>
     <a href="https://shiny-puppy-c4fb73.netlify.app/">🌐 Live Demo</a> •
     <a href="https://docs.google.com/presentation/d/1XLSxe06cF8xWizxYojb00pld6w8yaxFN3qFR1Mx298w/edit?usp=sharing">📊 Pitch Deck</a> •
-    <a href="https://github.com/shampaLa/CopyrightStellar">📁 Repository</a>
+    <a href="https://github.com/shampaLa/CopyrightStellar">📁 Repository</a> •
+    <a href="https://forms.gle/FLf2ogBepCsf3Vtf9">📝 Feedback Form</a>
   </p>
 
   <p>
@@ -330,6 +331,7 @@ This software is provided under the [MIT License](./LICENSE).
   <p>Built with ❤️ on <a href="https://stellar.org">Stellar Soroban</a> by <a href="https://github.com/codewithShampa">codewithShampa</a></p>
   <p>
     <a href="https://shiny-puppy-c4fb73.netlify.app/">Live App</a> •
+    <a href="https://forms.gle/FLf2ogBepCsf3Vtf9">Feedback Form</a> •
     <a href="https://docs.google.com/presentation/d/1XLSxe06cF8xWizxYojb00pld6w8yaxFN3qFR1Mx298w/edit?usp=sharing">Pitch Deck</a>
   </p>
 </div>
