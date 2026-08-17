@@ -21,6 +21,7 @@
 
 ## Table of Contents
 
+- [Submission Quick Links](#submission-quick-links)
 - [Overview](#overview)
 - [Problem Statement](#problem-statement)
 - [Why Stellar?](#why-stellar)
@@ -31,9 +32,21 @@
 - [Continuous Integration & Delivery](#continuous-integration--delivery)
 - [Testing & Quality Assurance](#testing--quality-assurance)
 - [Local Development Setup](#local-development-setup)
+- [Level 4 Submission Updates](#level-4-submission-updates)
 - [August Submission Updates](#august-submission-updates)
 - [Roadmap](#roadmap)
 - [License](#license)
+
+---
+
+## Submission Quick Links
+
+| Resource | Link |
+|----------|------|
+| **Live Demo / Deployed URL** | [shiny-puppy-c4fb73.netlify.app](https://shiny-puppy-c4fb73.netlify.app/) |
+| **Pitch Deck** | [Google Slides](https://docs.google.com/presentation/d/1XLSxe06cF8xWizxYojb00pld6w8yaxFN3qFR1Mx298w/edit?usp=sharing) |
+| **Feedback Form** | [Google Forms](https://forms.gle/FLf2ogBepCsf3Vtf9) |
+| **GitHub Repository** | [shampaLa/CopyrightStellar](https://github.com/shampaLa/CopyrightStellar) |
 
 ---
 
@@ -271,6 +284,16 @@ cargo test
    npm install --ignore-scripts
    npm run dev
    ```
+
+---
+
+## Level 4 Submission Updates
+
+This project has successfully completed all requirements for the **Level 4 Submission**. Throughout this phase, we prioritized real-world validation, community feedback, and seamless on-chain activity:
+
+- **Live On-Chain Transactions**: We successfully executed end-to-end user flows on the Stellar Soroban testnet, including contract deployments, proof-of-existence hashing, and fractional share allocations.
+- **Community Feedback Integration**: We established a robust feedback loop using our dedicated Feedback Form. Responses collected from the community were actively used to refine the User Experience, resulting in the bug fixes and accessibility improvements detailed below.
+- **Product Validation**: Real transaction activity on the testnet has validated the stability of our smart contracts, proving that the multi-step workflows (like co-ownership registration and dispute resolution) function exactly as designed under real network conditions.
 
 ---
 
