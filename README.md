@@ -185,6 +185,18 @@ All smart contracts are deployed on the **Stellar Soroban Testnet**. The system 
 
 ## Screenshots
 
+### Level 1 Requirements
+
+<div align="center">
+  <img src="./assets/balanceSS.png" alt="Wallet Connected and Balance Displayed" width="860"/>
+  <p><em>Wallet Connected State & Balance Displayed</em></p>
+</div>
+
+<div align="center">
+  <img src="./assets/transaction.png" alt="Successful Testnet Transaction" width="860"/>
+  <p><em>Successful Testnet Transaction & Result Shown</em></p>
+</div>
+
 ### Product UI
 
 <div align="center">
